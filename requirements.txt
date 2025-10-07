@@ -1,0 +1,12 @@
+streamlit
+transformers>=4.30.0
+sentence-transformers
+faiss-cpu
+torch
+pypdf
+nltk
+python-dotenv
+accelerate
+bitsandbytes
+sentencepiece
+huggingface-hub
