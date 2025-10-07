@@ -32,9 +32,9 @@ streamlit run app.py
 Once your document(s) are indexed and the app is running, try these queries to validate the chatbot:
 
 * "Summarize the main objectives described in this document."
-* "According to the text, what are the steps in the RAG pipeline?"
-* "What does the chunking strategy mention about sentence limits?"
-* "Explain how embeddings are used in this chatbot."
+* "what is meant by eBay?"
+* "what are purchase conditions when buying an item?"
+* " Explain what is eBay Money Back Guarantee."
 * "If the answer is not found in the document, how should the assistant respond?"
 
 ---

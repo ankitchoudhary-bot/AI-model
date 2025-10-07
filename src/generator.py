@@ -28,46 +28,6 @@ def build_prompt(retrieved_chunks, question: str, max_context_chars: int = 3500)
     return PROMPT_TEMPLATE.format(context=context, question=question)
 
 
-# def stream_generate(model_name: str, prompt: str, max_new_tokens: int = 256):
-#     """
-#     Streams decoded text from a HuggingFace-compatible causal LM that supports streaming via TextIteratorStreamer.
-
-#     NOTE: Large instruction models may require GPU and more setup (device_map, bitsandbytes, etc.). For small-scale testing use a tiny model.
-#     """
-#     tokenizer = AutoTokenizer.from_pretrained(model_name, use_fast=True)
-#     model = AutoModelForCausalLM.from_pretrained(model_name, device_map="auto")
-
-#     streamer = TextIteratorStreamer(tokenizer, skip_prompt=True, skip_special_tokens=True)
-
-#     inputs = tokenizer(prompt, return_tensors="pt", truncation=True, max_length=1024)
-#     input_ids = inputs.input_ids
-#     attention_mask = inputs.attention_mask if "attention_mask" in inputs else None
-
-#     # Extra safety: truncate manually if still >1024
-#     if input_ids.shape[1] > 1024:
-#         input_ids = input_ids[:, -1024:]
-#         if attention_mask is not None:
-#             attention_mask = attention_mask[:, -1024:]
-#     input_ids = inputs.input_ids.to(model.device)
-    
-#     if attention_mask is not None:
-#         attention_mask = attention_mask.to(model.device)
-
-#     gen_kwargs = dict(
-#         input_ids=input_ids,
-#         max_new_tokens=max_new_tokens,
-#         streamer=streamer,
-#         do_sample=False,
-#         pad_token_id=tokenizer.eos_token_id,
-#     )
-
-#     thread = threading.Thread(target=model.generate, kwargs=gen_kwargs)
-#     thread.start()
-
-#     for new_text in streamer:
-#         yield new_text
-
-
 def stream_generate(model_name: str, prompt: str, max_new_tokens: int = 256):
 
     tokenizer = AutoTokenizer.from_pretrained(model_name, use_fast=True)
